@@ -21,13 +21,22 @@ export default function Home({ data }) {
           display: grid;
           height: 100%;
           place-items: center;
+          padding-top: 65px;
         }
       `}</style>
     </>
   )
 }
-export async function getStaticProps() {
-  const res = await fetch("http://www.omdbapi.com/?apikey=968c2650&s=batman")
+export async function getStaticProps(valor) {
+  console.log("GETSTATIC", valor)
+  // trate de poder generar codigo para hacerlo con promesas
+  // pero en la ultima instacia de devolver el archivo me falla
+
+  const res = await fetch(
+    `http://www.omdbapi.com/?apikey=968c2650&s=${
+      valor.length ? valor : "batman"
+    }`
+  )
   const data = await res.json()
 
   return {
